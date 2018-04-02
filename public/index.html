@@ -18,10 +18,10 @@
       <div id="payment-request">
         <div id="payment-request-button"></div>
       </div>
-      <form id="payment-form" method="POST" action="/orders">
-        <p class="instruction">Complete your shipping and payment details below</p>
-        <section>
-          <h2>Shipping &amp; Billing Information</h2>
+   <!--   <form id="payment-form" method="POST" action="/orders">
+      <p class="instruction">Complete your shipping and payment details below</p>
+       <section>
+         <h2>Shipping &amp; Billing Information</h2>
           <fieldset class="with-state">
             <label>
               <span>Name</span>
@@ -81,10 +81,10 @@
               </div>
             </label>
           </fieldset>
-          <p class="tip">Select another country to see different payment options.</p>
-        </section>
+         <p class="tip">Select another country to see different payment options.</p> 
+        </section> 
         <section>
-          <h2>Payment Information</h2>
+       <h2>Payment Information</h2>
           <nav id="payment-methods">
             <ul>
               <li>
@@ -133,14 +133,14 @@
               </li>
             </ul>
           </nav>
-          <div class="payment-info card visible">
+         <div class="payment-info card visible">
             <fieldset>
               <label>
                 <span>Card</span>
                 <div id="card-element" class="field"></div>
               </label>
             </fieldset>
-          </div>
+          </div> 
           <div class="payment-info sepa_debit">
             <fieldset>
               <label>
@@ -163,10 +163,11 @@
             <p class="notice">Click the button below to generate a QR code for WeChat.</p>
           </div>
         </section>
-        <button type="submit">Pay</button>
-      </form>
+        <button type="submit">Pay with stripe</button>
+      </form> -->
+  
       <div id="card-errors" class="payment-errors"></div>
-    </div>
+ </div>
     <div id="confirmation">
       <div class="status processing">
         <h1>Completing your order…</h1>

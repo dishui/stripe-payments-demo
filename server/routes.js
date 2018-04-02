@@ -287,4 +287,23 @@ router.get('/products/:id', async (req, res) => {
   res.json(await products.retrieve(req.params.id));
 });
 
+//Retrieve shipping options
+router.get('/shippingRates', async (req, res) => {
+  res.json(
+    [{
+      id: 'flatReat',
+      label: 'Flat Rate Free Shipping',
+      detail: 'Delivery within 7 days',
+      amount: 0
+    },
+    {
+      id: 'expensive',
+      label: 'expensive Shipping',
+      detail: 'Delivery within 1 days',
+      amount: 1000
+    }
+  ]
+  )
+});
+
 module.exports = router;
