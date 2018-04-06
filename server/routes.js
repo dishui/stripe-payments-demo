@@ -288,7 +288,7 @@ router.get('/products/:id', async (req, res) => {
 });
 
 //Retrieve shipping options
-router.get('/shippingRates', async (req, res) => {
+router.put('/shippingRates', async (req, res) => {
   res.json(
     [{
       id: 'flatReat',

@@ -81,7 +81,7 @@
   });
 
    // Callback when a token is created.
-   paymentRequest.on('token', async event => {
+  paymentRequest.on('token', function(event) {
     console.log('creating token ', event);
 
     try {
@@ -90,15 +90,17 @@
       event.complete('fail');
     }
   });
+  
 
   // Callback when the shipping address is updated.
-  paymentRequest.on('shippingaddresschange', event => {
+  paymentRequest.on('shippingaddresschange', function(event) {
     console.log("shipping address changed", event);
     
   fetch('/shippingRates', {
     data: JSON.stringify({
       shippingAddress: event.shippingAdress
-    })
+    }),
+    method: 'PUT'
   }).then(function(response) {
     return response.json();
   }).then(function(result) {
@@ -107,46 +109,43 @@
       shippingOptions: result
      });
   });
-  /*event.updateWith({
-    status: 'fail'
-  });*/
+
   
     console.log('paymentRequest', paymentRequest);
   });
 
-  paymentRequest.on('shippingoptionchange', event => {
-   // can update the shipping charge and tax
-   console.log('shipping option changed', event);
-   let cal = event.shippingOption.amount + store.getOrderTotal();
-   let tax = 780
-   let tot = cal + tax;
-   event.updateWith(
-     {
-       status: 'success',
-        displayItems: [
-          {
-            label: 'order',
-            amount: store.getOrderTotal()
-          },
-          {
-            label: 'shipping',
-            amount: event.shippingOption.amount
-          },
-          {
-          label: 'tax',
-          amount: tax
-        }
-      ],
-      total: {
-        label: 'Total',
-        amount: store.getOrderTotal() + tax + event.shippingOption.amount,
-      },
-     // shippingOption: event.shippingOption
-     }
-   );
-   console.log('paymentRequest after shippingoptionchange', paymentRequest);
-  });
-
+  paymentRequest.on('shippingoptionchange', function(event) {
+    // can update the shipping charge and tax
+    console.log('shipping option changed', event);
+    let cal = event.shippingOption.amount + store.getOrderTotal();
+    let tax = 780
+    let tot = cal + tax;
+    event.updateWith(
+      {
+        status: 'success',
+         displayItems: [
+           {
+             label: 'order',
+             amount: store.getOrderTotal()
+           },
+           {
+             label: 'shipping',
+             amount: event.shippingOption.amount
+           },
+           {
+           label: 'tax',
+           amount: tax
+         }
+       ],
+       total: {
+         label: 'Total',
+         amount: store.getOrderTotal() + tax + event.shippingOption.amount,
+       },
+      // shippingOption: event.shippingOption
+      }
+    );
+    console.log('paymentRequest after shippingoptionchange', paymentRequest);
+   });
 
 
   // Create the Payment Request Button.
